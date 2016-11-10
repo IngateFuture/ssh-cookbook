@@ -16,7 +16,7 @@ service 'ssh' do
 end
 
 ssh_config 'Port' do
-  string "Port #{node['ssh'][:port]}"
+  string "Port #{node['ssh']['port']}"
 end
 
 ssh_config 'PermitRootLogin' do
