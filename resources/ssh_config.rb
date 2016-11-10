@@ -1,3 +1,8 @@
+resource_name :ssh_config
+
+property :match, String, name_property: true
+property :string, String
+
 action :add do
   bash "Adding #{new_resource.name} to sshd_config" do
     code %{
@@ -9,7 +14,7 @@ action :add do
       fi
     }
     not_if %{ egrep -c "^#{new_resource.string}$" /etc/ssh/sshd_config -q }
-    notifies :restart, resources(:service => "ssh"), :delayed
+    notifies :restart, resources(service: "ssh"), :delayed
   end
 end
 
@@ -20,7 +25,7 @@ action :add_multiline do
       echo -en "#{new_resource.string}\n" >> /etc/ssh/sshd_config
     }
     not_if %{ [[ ! $(cat /etc/ssh/sshd_config) =~ "#{new_resource.match}" ]] }
-    notifies :restart, resources(:service => "ssh"), :delayed
+    notifies :restart, resources(service: "ssh"), :delayed
   end
 end
 
@@ -31,6 +36,6 @@ action :remove do
       sed -i '/#{new_resource.match}.*/ d' /etc/ssh/sshd_config
     }
     only_if %{ egrep -c "^#{new_resource.string}$" /etc/ssh/sshd_config -q }
-    notifies :restart, resources(:service => "ssh"), :delayed
+    notifies :restart, resources(service: "ssh"), :delayed
   end
 end
