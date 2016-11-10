@@ -48,7 +48,7 @@ ssh_config "DenyUsers" do
   only_if { node[:ssh][:denied_users].any? }
 end
 
-ssh_authorized_keys "root" do
-  home "/root"
-  ssh_keys node[:ssh][:root_authorized_keys]
-end
+#ssh_authorized_keys "root" do
+#  home "/root"
+#  ssh_keys node[:ssh][:root_authorized_keys]
+#end
