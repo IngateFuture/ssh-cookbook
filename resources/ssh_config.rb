@@ -3,6 +3,8 @@ resource_name :ssh_config
 property :match, String, name_property: true
 property :string, String
 
+include_recipe 'openssh::default'
+
 action :add do
   bash "Adding #{new_resource.name} to sshd_config" do
     code %{
