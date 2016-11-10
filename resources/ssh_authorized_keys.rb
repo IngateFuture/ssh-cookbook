@@ -1,3 +1,9 @@
+resource_name :ssh_key
+
+property :username, String, name_property: true
+property :ssh_keys, Array, default: []
+property :home, String
+
 action :setup do
   directory "#{new_resource.home}/.ssh for authorized_keys" do
     path "#{new_resource.home}/.ssh"

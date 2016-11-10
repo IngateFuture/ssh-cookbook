@@ -1,3 +1,16 @@
+resource_name :ssh_key
+
+property :host, String, name_property: true
+property :username, String
+property :home, String
+property :password, String
+property :port, Integer, default: 22
+property :private_key, String
+property :public_key, String
+property :local_ssh_key, String, default: "~/.ssh/id_rsa"
+property :local_known_hosts, String, default: "~/.ssh/known_hosts"
+property :remote_authorized_keys, String, default: "~/.ssh/authorized_keys"
+
 action :create do
   if new_resource.private_key && new_resource.public_key
     directory "#{new_resource.home}/.ssh for ssh keys" do
