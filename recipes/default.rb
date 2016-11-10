@@ -1,5 +1,7 @@
 # https://github.com/chef-cookbooks/openssh/pull/62
 
+include_recipe 'openssh::default'
+
 service_provider = nil
 
 if node['platform'] == 'ubuntu'
