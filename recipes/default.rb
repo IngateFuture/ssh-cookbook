@@ -69,3 +69,8 @@ end
 #  home '/root'
 #  ssh_keys node['ssh']['root_authorized_keys']
 #end
+
+service 'ssh' do
+  provider service_provider
+  action [:restart]
+end
